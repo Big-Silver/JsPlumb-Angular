@@ -53,7 +53,6 @@ myApp.controller('PlumbCtrl', function($scope) {
 
 	// add a module to the library
 	$scope.addModuleToLibrary = function(title, description, posX, posY) {
-		//console.log("Add module " + title + " to library, at position " + posX + "," + posY);
 		var library_id = $scope.library_uuid++;
 		var schema_id = -1;
 		var m = new module(library_id, schema_id, title, description, posX, posY);
@@ -62,7 +61,6 @@ myApp.controller('PlumbCtrl', function($scope) {
 
 	// add a module to the schema
 	$scope.addModuleToSchema = function(library_id, posX, posY) {
-		//console.log("Add module " + title + " to schema, at position " + posX + "," + posY);
 		var schema_id = $scope.schema_uuid++;
 		var title = "Unknown";
 		var description = "Likewise unknown";
@@ -77,11 +75,9 @@ myApp.controller('PlumbCtrl', function($scope) {
 	};
 
 	$scope.removeState = function(schema_id) {
-		//console.log("Remove state " + schema_id + " in array of length " + $scope.schema.length);
 		for (var i = 0; i < $scope.schema.length; i++) {
 			// compare in non-strict manner
 			if ($scope.schema[i].schema_id == schema_id) {
-				//console.log("Remove state at position " + i);
 				$scope.schema.splice(i, 1);
 			}
 		}
@@ -89,10 +85,8 @@ myApp.controller('PlumbCtrl', function($scope) {
 
 	$scope.init = function() {
 		jsPlumb.bind("ready", function() {
-			//console.log("Set up jsPlumb listeners (should be only done once)");
 			jsPlumb.bind("connection", function (info) {
 				$scope.$apply(function () {
-					//console.log("Possibility to push connection into array");
 				});
 			});
 		});
@@ -169,7 +163,6 @@ myApp.directive('plumbConnect', function() {
 	return {
 		replace: true,
 		link: function (scope, element, attrs) {
-			//console.log("Add plumbing for the 'connect' element");
 
 			jsPlumb.makeSource(element, {
 				parent: $(element).parent(),
@@ -189,7 +182,6 @@ myApp.directive('droppable', function($compile) {
 	return {
 		restrict: 'A',
 		link: function(scope, element, attrs){
-			//console.log("Make this element droppable");
 
 			element.droppable({
 				drop:function(event,ui) {
@@ -201,7 +193,6 @@ myApp.directive('droppable', function($compile) {
 
 					// if dragged item has class menu-item and dropped div has class drop-container, add module 
 					if (dragEl.hasClass('menu-item') && dropEl.hasClass('drop-container')) {
-						//console.log("Drag event on " + dragIndex);
 						var x = event.pageX - scope.module_css.width / 2;
 						var y = event.pageY - scope.module_css.height / 2;
 
@@ -221,7 +212,6 @@ myApp.directive('draggable', function() {
 		restrict:'A',
 		//The link function is responsible for registering DOM listeners as well as updating the DOM.
 		link: function(scope, element, attrs) {
-			//console.log("Let draggable item snap back to previous position");
 			element.draggable({
 				// let it go back to its original position
 				revert:true,
